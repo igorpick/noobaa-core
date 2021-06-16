@@ -35,19 +35,10 @@ class Quota {
     }
 
     /**
-     * get Quota object instance
-     * @param {*} quota_config - json config object
-     * @returns - null or instance
-     */
-    static get_instance(quota_config) {
-        return quota_config == null ? null : new Quota(quota_config);
-    }
-
-    /**
      * @returns size value getter
      */
     get size_value() {
-        return this.#size == null ? null : this.#size.value;
+        return this.#size == null ? 0 : this.#size.value;
     }
 
     /**
@@ -61,7 +52,7 @@ class Quota {
      * @returns quantity value getter
      */
     get quantity_value() {
-        return this.#quantity == null ? null : this.#quantity.value;
+        return this.#quantity == null ? 0 : this.#quantity.value;
     }
 
     /**
@@ -76,7 +67,7 @@ class Quota {
      * @returns calculated bigint size raw value of quota
      */
     get_quota_size_raw_value() {
-        return this.#size == null ? null : this.#size.raw_value;
+        return this.#size == null ? 0 : this.#size.raw_value;
     }
 
     /**
@@ -84,7 +75,7 @@ class Quota {
      * @returns calculated bigint quantity raw value of quota
      */
     get_quota_quantity_raw_value() {
-        return this.#quantity == null ? null : this.#quantity.raw_value;
+        return this.#quantity == null ? 0 : this.#quantity.raw_value;
     }
 
     /**
@@ -92,10 +83,14 @@ class Quota {
      * @returns - new quota config object without raw values
      */
     get_config() {
-        return {
-            size: _.omit(this.#size, 'raw_value'),
-            quantity: _.omit(this.#quantity, 'raw_value')
-        };
+        const config = {}
+        if (this.#size && this.#size !== null) {
+            config.size = _.omit(this.#size, 'raw_value');
+        }
+        if (this.#quantity && this.#quantity !== null) {
+            config.quatity = _.omit(this.#quantity, 'raw_value');
+        }
+        return config;
     }
 
 }

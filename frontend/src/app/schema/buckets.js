@@ -282,11 +282,11 @@ export default {
                 }
             },
             quota: {
+                additionalProperties: true,
                 type: 'object',
                 required: [
                     'mode',
-                    'size',
-                    'unit'
+                    'size'
                 ],
                 properties: {
                     mode: {
@@ -298,15 +298,32 @@ export default {
                         ]
                     },
                     size: {
-                        type: 'integer'
+                        type: 'object',
+                        additionalProperties: true,
+                        required: ['value', 'unit'],
+                        properties: {
+                            value: {
+                                type: 'integer'
+                            },
+                            unit: {
+                                type: 'string',
+                                enum: ['GIGABYTE', 'TERABYTE', 'PETABYTE']
+                            }
+                        }
                     },
-                    unit: {
-                        type: 'string',
-                        enum: [
-                            'GIGABYTE',
-                            'TERABYTE',
-                            'PETABYTE'
-                        ]
+                    quantity: {
+                        type: 'object',
+                        additionalProperties: true,
+                        required: ['value'],
+                        properties: {
+                            value: {
+                                type: 'integer'
+                            },
+                            unit: {
+                                type: 'string',
+                                enum: ['K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']
+                            }
+                        }
                     }
                 }
             },

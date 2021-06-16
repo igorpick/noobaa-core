@@ -126,6 +126,17 @@ function size_unit_to_bigint(size, unit) {
     return big.multiply(size);
 }
 
+function quantity_to_bigint(quantity, unit) {
+    const power = SIZE_UNITS.indexOf(unit);
+    if (power <= 0) {
+        return new BigInteger(quantity);
+    } else {
+        const base = Math.pow(1000, power)
+        const big = new BigInteger(base);
+        return big.multiply(quantity);
+    }
+}
+
 /**
  * mult_factor & div_factor must be positive integers.
  */
@@ -330,6 +341,7 @@ exports.bigint_to_json = bigint_to_json;
 exports.bigint_to_bytes = bigint_to_bytes;
 exports.json_to_bigint = json_to_bigint;
 exports.size_unit_to_bigint = size_unit_to_bigint;
+exports.quantity_to_bigint = quantity_to_bigint;
 exports.to_bigint_storage = to_bigint_storage;
 exports.to_storage_bigint = to_storage_bigint;
 exports.reduce_storage = reduce_storage;

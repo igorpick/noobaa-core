@@ -945,17 +945,7 @@ module.exports = {
                     }
                 },
                 quota: {
-                    type: 'object',
-                    required: ['size', 'unit'],
-                    properties: {
-                        size: {
-                            type: 'integer'
-                        },
-                        unit: {
-                            type: 'string',
-                            enum: ['GIGABYTE', 'TERABYTE', 'PETABYTE']
-                        },
-                    }
+                    $ref: '#/definitions/quota_config'
                 },
                 data: {
                     type: 'object',
@@ -1227,17 +1217,7 @@ module.exports = {
                     anyOf: [{
                         type: 'null'
                     }, {
-                        type: 'object',
-                        required: ['size', 'unit'],
-                        properties: {
-                            size: {
-                                type: 'integer'
-                            },
-                            unit: {
-                                type: 'string',
-                                enum: ['GIGABYTE', 'TERABYTE', 'PETABYTE']
-                            },
-                        }
+                        $ref: '#/definitions/quota_config'
                     }]
                 },
                 // spillover: {
@@ -1447,6 +1427,44 @@ module.exports = {
                     $ref: 'common_api#/definitions/bucket_cache_config'
                 },
                 should_create_underlying_storage: { type: 'boolean' } // should create underlying storage
+            }
+        },
+
+        quota_config: {
+            type: 'object',
+            properties: {
+                size: {
+                    type: 'object',
+                    required: ['value', 'unit'],
+                    properties: {
+                        value: {
+                            type: 'integer'
+                        },
+                        unit: {
+                            type: 'string',
+                            enum: ['GIGABYTE', 'TERABYTE', 'PETABYTE']
+                        },
+                    },
+                    /* additionalProperties: {
+                        $ref: 'common_api#/definitions/bigint'
+                    } */
+                },
+                quantity: {
+                    type: 'object',
+                    required: ['value'],
+                    properties: {
+                        value: {
+                            type: 'integer'
+                        },
+                        unit: {
+                            type: 'string',
+                            enum: ['K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']
+                        },
+                    },
+                    /* additionalProperties: {
+                        $ref: 'common_api#/definitions/bigint'
+                    }, */
+                }
             }
         },
     }

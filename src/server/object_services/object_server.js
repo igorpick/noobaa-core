@@ -1579,12 +1579,12 @@ function check_quota(bucket) {
         const message = `the bucket ${bucket.name} used storage(${
                 size_utils.human_size(bucket_used)
             }) exceeds the bucket quota (${
-                size_utils.human_size(bucket.quota.value)
+                size_utils.human_size(bucket.quota.size.raw_value)
             })`;
         Dispatcher.instance().alert('MAJOR',
             system_store.data.systems[0]._id,
             `Bucket ${bucket.name.unwrap()} exceeded its configured quota of ${
-                    size_utils.human_size(bucket.quota.value)
+                    size_utils.human_size(bucket.quota.size.raw_value)
                 }, uploads to this bucket will be denied`,
             Dispatcher.rules.once_daily);
         dbg.error(message);
@@ -1592,7 +1592,7 @@ function check_quota(bucket) {
     } else if (used_percent >= 90) {
         Dispatcher.instance().alert('INFO',
             system_store.data.systems[0]._id,
-            `Bucket ${bucket.name.unwrap()} exceeded 90% of its configured quota of ${size_utils.human_size(bucket.quota.value)}`,
+            `Bucket ${bucket.name.unwrap()} exceeded 90% of its configured quota of ${size_utils.human_size(bucket.quota.size.raw_value)}`,
             Dispatcher.rules.once_daily);
     }
 }

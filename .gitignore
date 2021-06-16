@@ -37,3 +37,6 @@ npm-debug.log*
 .DS_Store
 
 noobaa.rpm
+
+## Local history plugin folder
+.history
