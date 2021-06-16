@@ -1445,9 +1445,6 @@ module.exports = {
                             enum: ['GIGABYTE', 'TERABYTE', 'PETABYTE']
                         },
                     },
-                    /* additionalProperties: {
-                        $ref: 'common_api#/definitions/bigint'
-                    } */
                 },
                 quantity: {
                     type: 'object',
@@ -1461,9 +1458,6 @@ module.exports = {
                             enum: ['K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']
                         },
                     },
-                    /* additionalProperties: {
-                        $ref: 'common_api#/definitions/bigint'
-                    }, */
                 }
             }
         },

@@ -282,11 +282,9 @@ export default {
                 }
             },
             quota: {
-                additionalProperties: true,
                 type: 'object',
                 required: [
-                    'mode',
-                    'size'
+                    'mode'
                 ],
                 properties: {
                     mode: {
@@ -299,7 +297,6 @@ export default {
                     },
                     size: {
                         type: 'object',
-                        additionalProperties: true,
                         required: ['value', 'unit'],
                         properties: {
                             value: {
@@ -313,7 +310,6 @@ export default {
                     },
                     quantity: {
                         type: 'object',
-                        additionalProperties: true,
                         required: ['value'],
                         properties: {
                             value: {
